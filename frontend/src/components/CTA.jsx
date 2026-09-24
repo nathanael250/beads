@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import ctaImg from '../assets/cta-img.png'
 
@@ -13,9 +14,9 @@ function CTA() {
               Book your appointment today and let us take care of the rest
             </p>
           </div>
-          <button className="inline-flex shrink-0 items-center gap-3 rounded bg-white px-5 py-3 text-xs font-black uppercase text-black">
+          <Link to="/book-appointment" className="inline-flex shrink-0 items-center gap-3 rounded bg-white px-5 py-3 text-xs font-black uppercase text-black">
             Book your appointment now <ArrowRight className="h-4 w-4" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

@@ -65,13 +65,13 @@ function About() {
               Our Journey <ArrowRight className="h-4 w-4" />
             </button>
           </div>
-          <img src={salonImg} alt="Beads salon interior" className="h-[360px] w-full rounded-lg object-cover lg:h-[410px]" />
+          <img src={salonImg} alt="Beads salon interior" className="hidden h-[360px] w-full rounded-lg object-cover md:block lg:h-[410px]" />
         </div>
       </section>
 
       <section className="px-5 pb-24">
         <SectionTitle eyebrow="OUR APPROACH" title="What We Dot It" />
-        <div className="mx-auto mt-20 grid max-w-6xl gap-12 text-center sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mx-auto mt-20 grid max-w-6xl grid-cols-2 gap-8 text-center sm:gap-12 lg:grid-cols-4">
           {approaches.map(({ title, text, icon: Icon }) => (
             <article key={title} className="mx-auto max-w-52">
               <div className="mx-auto grid h-16 w-16 place-items-center rounded-full border border-black text-black">

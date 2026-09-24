@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight, Award, Clock, Scissors, Star } from 'lucide-react'
 import { FaAward, FaChair, FaHeart } from 'react-icons/fa6'
 import { PiHairDryerFill, PiPaintBrushBroadFill, PiSprayBottleFill } from 'react-icons/pi'
@@ -7,11 +8,20 @@ import SectionTitle from '../components/SectionTitle'
 import heroImg from '../assets/hello-img.png'
 import salonImg from '../assets/why-beads-img.png'
 
+const galleryImages = Object.entries(
+  import.meta.glob('../assets/gallery/*.{jpg,jpeg,png}', {
+    eager: true,
+    import: 'default',
+  }),
+)
+  .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+  .map(([, image]) => image)
+
 function Home() {
   const services = [
-    { title: 'Hair Services', icon: PiHairDryerFill },
-    { title: 'Nail Services', icon: GiFingernail },
-    { title: 'Skin Care', icon: PiPaintBrushBroadFill },
+    { title: 'Hair Services', href: '/services/hair', icon: PiHairDryerFill },
+    { title: 'Nail Services', href: '/services/nails', icon: GiFingernail },
+    { title: 'Skin Care', href: '/services/skin-care', icon: PiPaintBrushBroadFill },
   ]
   const standards = [
     {
@@ -56,12 +66,12 @@ function Home() {
                 Hair, nail and skin care designed around you. Look good Feel confident. Be your best
               </p>
               <div className="mt-7 flex flex-wrap gap-8">
-                <button className="inline-flex items-center gap-3 rounded-md bg-white px-4 py-3 text-xs font-bold text-black">
+                <Link to="/book-appointment" className="inline-flex items-center gap-3 rounded-md bg-white px-4 py-3 text-xs font-bold text-black">
                   Book appointment <ArrowRight className="h-4 w-4" />
-                </button>
-                <button className="inline-flex items-center gap-3 rounded-md border border-white bg-black/20 px-4 py-3 text-xs font-bold text-white">
+                </Link>
+                <Link to="/services/hair" className="inline-flex items-center gap-3 rounded-md border border-white bg-black/20 px-4 py-3 text-xs font-bold text-white">
                   Explore services <ArrowRight className="h-4 w-4" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -71,8 +81,12 @@ function Home() {
       <section className="px-5 py-24">
         <SectionTitle eyebrow="WHAT WE DO BEST" title="Our Services Categories" />
         <div className="mx-auto mt-16 grid max-w-6xl gap-10 md:grid-cols-3">
-          {services.map(({ title, icon: Icon }) => (
-            <article key={title} className="overflow-hidden rounded-lg border border-neutral-200 bg-white text-center">
+          {services.map(({ title, href, icon: Icon }) => (
+            <Link
+              key={title}
+              to={href}
+              className="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
+            >
               <img src={heroImg} alt="" className="h-40 w-full object-cover grayscale" />
               <div className="relative px-8 pb-8 pt-16">
                 <div className="absolute left-1/2 top-0 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-white bg-black text-white">
@@ -82,11 +96,11 @@ function Home() {
                 <p className="mx-auto mt-5 max-w-xs text-sm font-semibold leading-tight text-neutral-700">
                   From classic cuts to modern styles, we craft the perfect look for you.
                 </p>
-                <button className="mx-auto mt-8 inline-flex items-center gap-3 text-xs font-black uppercase">
-                  Explore services <ArrowRight className="h-4 w-4" />
-                </button>
+                <span className="mx-auto mt-8 inline-flex items-center gap-3 text-xs font-black uppercase">
+                  Explore services <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </section>
@@ -147,10 +161,19 @@ function Home() {
       <section className="px-5 pb-24">
         <SectionTitle eyebrow="OUR GALLERY" title="Experience at Beads" />
         <div className="mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-[1.15fr_1fr]">
-          <img src={salonImg} alt="Beads salon chairs and mirrors" className="h-[340px] w-full object-cover sm:h-[520px]" />
+          <img
+            src={galleryImages[0]}
+            alt="Beads salon experience"
+            className="h-[340px] w-full object-cover sm:h-[520px]"
+          />
           <div className="grid grid-cols-2 gap-6">
-            {[1, 2, 3, 4].map((item) => (
-              <img key={item} src={salonImg} alt="" className="h-[150px] w-full object-cover sm:h-[247px]" />
+            {galleryImages.slice(1, 5).map((image, index) => (
+              <img
+                key={image}
+                src={image}
+                alt={`Beads gallery view ${index + 2}`}
+                className="h-[150px] w-full object-cover sm:h-[247px]"
+              />
             ))}
           </div>
         </div>
