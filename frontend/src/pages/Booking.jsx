@@ -1,60 +1,45 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { ArrowRight, CalendarDays, CheckCircle, Clock, Phone, UserRound } from 'lucide-react'
+import { ArrowRight, Scissors } from 'lucide-react'
 import { hairServices, nailServices, skinServices } from '../data/servicesData'
 
-const serviceGroups = [
-  { label: 'Hair Services', services: hairServices },
-  { label: 'Nail Services', services: nailServices },
-  { label: 'Skin Care', services: skinServices },
-]
+const serviceOptions = [
+  hairServices.find((service) => service.title === 'Classic Haircut'),
+  hairServices.find((service) => service.title === 'Fade Haircut'),
+  hairServices.find((service) => service.title === 'Hair Trim'),
+  hairServices.find((service) => service.title === 'Twists'),
+  nailServices.find((service) => service.title === 'Classic Manicure'),
+  skinServices.find((service) => service.title === 'Basic Facial'),
+].filter(Boolean)
+
+const serviceLabels = {
+  'Classic Haircut': 'Haircut',
+  'Fade Haircut': 'Beard Trim',
+  'Hair Trim': 'Haircut + Beard',
+  Twists: 'Twists',
+  'Classic Manicure': 'Manicure',
+  'Basic Facial': 'Facial',
+}
 
 const barbers = [
-  {
-    id: 'jean-claude',
-    name: 'Jean Claude',
-    role: 'Senior Barber',
-    text: 'Best for precision cuts, fades, and classic grooming.',
-  },
-  {
-    id: 'diane-uwase',
-    name: 'Diane Uwase',
-    role: 'Nail Specialist',
-    text: 'Best for manicures, pedicures, gel, and acrylic care.',
-  },
-  {
-    id: 'aline-kayitesi',
-    name: 'Aline Kayitesi',
-    role: 'Skin Care Specialist',
-    text: 'Best for facials, exfoliation, and glow-focused care.',
-  },
-  {
-    id: 'any-professional',
-    name: 'Any Available Professional',
-    role: 'Beads Team',
-    text: 'Let us match you with the best available specialist.',
-  },
+  { id: 'jean-claude', name: 'Jean Claude', role: 'Senior Barber' },
+  { id: 'diane-uwase', name: 'Diane Uwase', role: 'Nail Specialist' },
+  { id: 'aline-kayitesi', name: 'Aline Kayitesi', role: 'Skin Care Specialist' },
+  { id: 'any-professional', name: 'Any Available Professional', role: 'Beads Team' },
 ]
+
+const fieldClassName = 'h-14 w-full rounded border border-neutral-300 bg-white px-5 text-sm outline-none transition placeholder:text-neutral-500 focus:border-black'
 
 function Booking() {
   const [searchParams] = useSearchParams()
   const preselectedService = searchParams.get('service')
-  const [selectedServices, setSelectedServices] = useState(() => (preselectedService ? [preselectedService] : []))
+  const defaultServices = preselectedService ? [preselectedService] : [serviceOptions[0]?.id].filter(Boolean)
+  const [selectedServices, setSelectedServices] = useState(defaultServices)
   const [selectedBarber, setSelectedBarber] = useState('jean-claude')
   const [submitted, setSubmitted] = useState(false)
 
-  const selectedServiceDetails = useMemo(
-    () =>
-      serviceGroups
-        .flatMap((group) => group.services)
-        .filter((service) => selectedServices.includes(service.id)),
-    [selectedServices],
-  )
-  const selectedBarberDetails = barbers.find((barber) => barber.id === selectedBarber)
-
-  function handleServicesChange(event) {
-    setSubmitted(false)
-    setSelectedServices(Array.from(event.target.selectedOptions, (option) => option.value))
+  function getServiceLabel(service) {
+    return serviceLabels[service.title] || service.title
   }
 
   function handleSubmit(event) {
@@ -68,160 +53,118 @@ function Booking() {
   }
 
   return (
-    <section className="border-t border-neutral-200 px-5 py-14 lg:py-20">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="lg:sticky lg:top-6 lg:self-start">
-            <p className="text-sm font-black uppercase">Book Appointment</p>
-            <h1 className="font-display mt-3 text-5xl font-black leading-none sm:text-6xl">
-              Plan your Beads visit.
-            </h1>
-            <p className="mt-6 max-w-md text-base font-medium leading-tight text-neutral-800">
-              Choose one or more services, pick your preferred professional, then tell us when to expect you.
-            </p>
-
-            <div className="mt-8 rounded-lg border border-neutral-200 p-6">
-              <p className="text-sm font-black uppercase">Selected Services</p>
-              {selectedServiceDetails.length > 0 ? (
-                <div className="mt-5 space-y-3">
-                  {selectedServiceDetails.map((service) => (
-                    <div key={service.id} className="flex items-center justify-between gap-4 text-sm font-semibold">
-                      <span>{service.title}</span>
-                      <span className="shrink-0 text-neutral-500">{service.duration}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="mt-5 text-sm font-medium text-neutral-600">No service selected yet.</p>
-              )}
+    <section className="border-t border-neutral-200 px-5 py-16 lg:py-20">
+      <div className="mx-auto flex w-full justify-center">
+        <form onSubmit={handleSubmit} className="w-full space-y-8" style={{ maxWidth: '720px' }}>
+          <div className="pb-5">
+            <h1 className="font-display text-4xl font-black leading-none">Book Your Appointment</h1>
+            <div className="mt-5 flex items-center gap-4">
+              <span className="h-px w-24 bg-black" />
+              <Scissors className="h-5 w-5" />
+              <span className="h-px w-24 bg-black" />
             </div>
+            <p className="mt-5 max-w-xl text-base font-medium leading-snug">
+              Choose your service, preferred professional, and the time that works best for your visit.
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-10">
-            <div>
-              <h2 className="font-display text-3xl font-black">Appointment Details</h2>
-              <div className="mt-6 grid gap-5">
-                <label>
-                  <span className="mb-2 block text-sm font-black uppercase">Services</span>
-                  <select
-                    required
-                    multiple
-                    name="services"
-                    value={selectedServices}
-                    onChange={handleServicesChange}
-                    className="min-h-56 w-full rounded-md border border-neutral-300 px-4 py-3 text-sm font-medium outline-none transition focus:border-black"
-                  >
-                    {serviceGroups.map((group) => (
-                      <optgroup key={group.label} label={group.label}>
-                        {group.services.map((service) => (
-                          <option key={`${service.category}-${service.id}`} value={service.id}>
-                            {service.title} - {service.duration}
-                          </option>
-                        ))}
-                      </optgroup>
-                    ))}
-                  </select>
-                  <span className="mt-2 block text-xs font-semibold text-neutral-500">
-                    Hold Command on Mac or Ctrl on Windows to select more than one service.
-                  </span>
-                </label>
-
-                <label>
-                  <span className="mb-2 block text-sm font-black uppercase">Barber / Professional</span>
-                  <select
-                    required
-                    name="barber"
-                    value={selectedBarber}
-                    onChange={(event) => {
-                      setSelectedBarber(event.target.value)
-                      setSubmitted(false)
-                    }}
-                    className="h-14 w-full rounded-md border border-neutral-300 px-4 text-sm font-medium outline-none transition focus:border-black"
-                  >
-                    {barbers.map((barber) => (
-                      <option key={barber.id} value={barber.id}>
-                        {barber.name} - {barber.role}
-                      </option>
-                    ))}
-                  </select>
-                  {selectedBarberDetails && (
-                    <span className="mt-2 block text-xs font-semibold text-neutral-500">
-                      {selectedBarberDetails.text}
-                    </span>
-                  )}
-                </label>
-              </div>
-            </div>
-
-            <div>
-              <h2 className="font-display text-3xl font-black">Your Details</h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <label className="relative">
-                  <UserRound className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500" />
-                  <input
-                    required
-                    name="name"
-                    type="text"
-                    placeholder="Full Name"
-                    className="h-14 w-full rounded-md border border-neutral-300 pl-12 pr-4 text-sm font-medium outline-none transition focus:border-black"
-                  />
-                </label>
-                <label className="relative">
-                  <Phone className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500" />
-                  <input
-                    required
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone Number"
-                    className="h-14 w-full rounded-md border border-neutral-300 pl-12 pr-4 text-sm font-medium outline-none transition focus:border-black"
-                  />
-                </label>
-                <label className="relative">
-                  <CalendarDays className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500" />
-                  <input
-                    required
-                    name="date"
-                    type="date"
-                    className="h-14 w-full rounded-md border border-neutral-300 pl-12 pr-4 text-sm font-medium outline-none transition focus:border-black"
-                  />
-                </label>
-                <label className="relative">
-                  <Clock className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-neutral-500" />
-                  <input
-                    required
-                    name="time"
-                    type="time"
-                    className="h-14 w-full rounded-md border border-neutral-300 pl-12 pr-4 text-sm font-medium outline-none transition focus:border-black"
-                  />
-                </label>
-              </div>
-            </div>
-
-            {selectedServices.length === 0 && (
-              <p className="text-sm font-semibold text-neutral-700">Please select at least one service before booking.</p>
-            )}
-
-            {submitted && (
-              <div className="flex items-center gap-3 rounded-md border border-black bg-neutral-50 p-4 text-sm font-bold">
-                <CheckCircle className="h-5 w-5" />
-                Appointment request prepared. We will contact the client to confirm the booking.
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="inline-flex w-full items-center justify-between rounded bg-black px-7 py-4 text-sm font-black uppercase text-white sm:max-w-md"
+          <div>
+            <label className="mb-4 block text-sm font-black" htmlFor="booking-services">
+              Services
+            </label>
+            <select
+              id="booking-services"
+              required
+              name="service"
+              value={selectedServices[0] || ''}
+              onChange={(event) => {
+                setSelectedServices(event.target.value ? [event.target.value] : [])
+                setSubmitted(false)
+              }}
+              className={fieldClassName}
             >
-              <span className="inline-flex items-center gap-4">
-                <CalendarDays className="h-6 w-6" />
-                Book Appointment
-              </span>
-              <ArrowRight className="h-6 w-6" />
-            </button>
-          </form>
-        </div>
+              <option value="" disabled>
+                Services
+              </option>
+              {serviceOptions.map((service) => (
+                <option key={service.id} value={service.id}>
+                  {getServiceLabel(service)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="mb-4 block text-sm font-black" htmlFor="booking-barber">
+              Barber / Professional
+            </label>
+            <select
+              id="booking-barber"
+              required
+              name="barber"
+              value={selectedBarber}
+              onChange={(event) => {
+                setSelectedBarber(event.target.value)
+                setSubmitted(false)
+              }}
+              className={fieldClassName}
+            >
+              {barbers.map((barber) => (
+                <option key={barber.id} value={barber.id}>
+                  {barber.name} - {barber.role}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <Field label="Full name" htmlFor="booking-name">
+            <input id="booking-name" required name="name" type="text" placeholder="John Doe" className={fieldClassName} />
+          </Field>
+
+          <Field label="Phone number" htmlFor="booking-phone">
+            <input id="booking-phone" required name="phone" type="tel" placeholder="+250 788 869 973" className={fieldClassName} />
+          </Field>
+
+          <div className="grid gap-8 sm:grid-cols-2">
+            <Field label="Preferred date" htmlFor="booking-date">
+              <input id="booking-date" required name="date" type="date" className={fieldClassName} />
+            </Field>
+
+            <Field label="Preferred time" htmlFor="booking-time">
+              <input id="booking-time" required name="time" type="time" className={fieldClassName} />
+            </Field>
+          </div>
+
+          {selectedServices.length === 0 && (
+            <p className="text-sm font-semibold text-neutral-700">Please select at least one service before booking.</p>
+          )}
+
+          {submitted && (
+            <p className="rounded-md border border-black bg-neutral-50 px-4 py-3 text-sm font-bold">
+              Appointment request prepared. We will contact the client to confirm the booking.
+            </p>
+          )}
+
+          <button
+            type="submit"
+            className="mt-4 inline-flex w-full items-center justify-between rounded bg-black px-7 py-4 text-sm font-black uppercase text-white"
+          >
+            Book appointment <ArrowRight className="h-5 w-5" />
+          </button>
+        </form>
       </div>
     </section>
+  )
+}
+
+function Field({ label, htmlFor, children }) {
+  return (
+    <div>
+      <label className="mb-4 block text-sm font-black" htmlFor={htmlFor}>
+        {label}
+      </label>
+      {children}
+    </div>
   )
 }
 

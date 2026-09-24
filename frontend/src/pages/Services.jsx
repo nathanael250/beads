@@ -31,18 +31,22 @@ function Services() {
         ) : (
           <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {services.map(({ id, title, text, image }) => (
-              <article key={id} className="overflow-hidden rounded-lg bg-white shadow-[0_2px_10px_rgba(0,0,0,0.22)]">
+              <Link
+                key={id}
+                to={`/services/${category}/${id}`}
+                className="group overflow-hidden rounded-lg bg-white shadow-[0_2px_10px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
+              >
                 <img src={image} alt={title} className="h-40 w-full object-cover object-center" />
                 <div className="px-5 pb-5 pt-5">
                   <h2 className="font-display text-xl font-black leading-none">{title}</h2>
                   <div className="mt-4 flex min-h-10 items-end justify-between gap-4">
                     <p className="max-w-40 text-[13px] font-medium leading-tight">{text}</p>
-                    <Link to={`/services/${category}/${id}`} aria-label={`View ${title}`} className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-black text-white">
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-black text-white">
+                      <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
+                    </span>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         )}

@@ -13,18 +13,20 @@ function Footer() {
             Hair, nail and skin care designed around you. Look good Feel confident. Be your best
           </p>
         </div>
-        <div>
-          <h4 className="text-sm font-black">Quick Links</h4>
-          <div className="mt-4 flex flex-col gap-2 text-sm text-white/75">
-            {navItems.map(({ label, href }) => <a key={label} href={href}>{label}</a>)}
+        <div className="grid grid-cols-2 gap-8 md:contents">
+          <div>
+            <h4 className="text-sm font-black">Quick Links</h4>
+            <div className="mt-4 flex flex-col gap-2 text-sm text-white/75">
+              {navItems.map(({ label, href }) => <a key={label} href={href}>{label}</a>)}
+            </div>
           </div>
-        </div>
-        <div>
-          <h4 className="text-sm font-black">Contact Us</h4>
-          <div className="mt-4 space-y-3 text-sm text-white/75">
-            <p className="flex gap-3"><Phone className="h-4 w-4" /> +250 788 869 973<br />+250 792 987 661</p>
-            <p className="flex gap-3"><Mail className="h-4 w-4" /> info@beads.com</p>
-            <p className="flex gap-3"><FaLocationDot className="h-4 w-4" /> beads-ltd.com</p>
+          <div>
+            <h4 className="text-sm font-black">Contact Us</h4>
+            <div className="mt-4 space-y-3 text-sm text-white/75">
+              <p className="flex gap-3"><Phone className="h-4 w-4" /> +250 788 869 973<br />+250 792 987 661</p>
+              <p className="flex gap-3"><Mail className="h-4 w-4" /> info@beads.com</p>
+              <p className="flex gap-3"><FaLocationDot className="h-4 w-4" /> beads-ltd.com</p>
+            </div>
           </div>
         </div>
         <div>

@@ -7,6 +7,9 @@ import CTA from '../components/CTA'
 import SectionTitle from '../components/SectionTitle'
 import heroImg from '../assets/hello-img.png'
 import salonImg from '../assets/why-beads-img.png'
+import hairServiceImg from '../assets/services/hair-service.png'
+import nailServiceImg from '../assets/services/nail-service.png'
+import skinCareImg from '../assets/services/skin-care.png'
 
 const galleryImages = Object.entries(
   import.meta.glob('../assets/gallery/*.{jpg,jpeg,png}', {
@@ -19,9 +22,9 @@ const galleryImages = Object.entries(
 
 function Home() {
   const services = [
-    { title: 'Hair Services', href: '/services/hair', icon: PiHairDryerFill },
-    { title: 'Nail Services', href: '/services/nails', icon: GiFingernail },
-    { title: 'Skin Care', href: '/services/skin-care', icon: PiPaintBrushBroadFill },
+    { title: 'Hair Services', href: '/services/hair', icon: PiHairDryerFill, image: hairServiceImg },
+    { title: 'Nail Services', href: '/services/nails', icon: GiFingernail, image: nailServiceImg },
+    { title: 'Skin Care', href: '/services/skin-care', icon: PiPaintBrushBroadFill, image: skinCareImg },
   ]
   const standards = [
     {
@@ -81,13 +84,13 @@ function Home() {
       <section className="px-5 py-24">
         <SectionTitle eyebrow="WHAT WE DO BEST" title="Our Services Categories" />
         <div className="mx-auto mt-16 grid max-w-6xl gap-10 md:grid-cols-3">
-          {services.map(({ title, href, icon: Icon }) => (
+          {services.map(({ title, href, icon: Icon, image }) => (
             <Link
               key={title}
               to={href}
               className="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
             >
-              <img src={heroImg} alt="" className="h-40 w-full object-cover grayscale" />
+              <img src={image} alt="" className="h-40 w-full object-cover grayscale" />
               <div className="relative px-8 pb-8 pt-16">
                 <div className="absolute left-1/2 top-0 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-white bg-black text-white">
                   <Icon className="h-9 w-9" />
@@ -107,7 +110,7 @@ function Home() {
 
       <section className="bg-black px-5 py-12 text-white">
         <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1fr_1fr]">
-          <img src={salonImg} alt="Beads salon interior" className="h-full max-h-[310px] w-full rounded object-cover" />
+          <img src={salonImg} alt="Beads salon interior" className="hidden h-full max-h-[310px] w-full rounded object-cover lg:block" />
           <div>
             <p className="text-sm font-black uppercase text-white/75">Why Beads</p>
             <h2 className="font-display mt-2 text-4xl font-black sm:text-5xl">A moment that&apos;s yours</h2>

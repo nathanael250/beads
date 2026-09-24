@@ -14,7 +14,7 @@ function CTA() {
               Book your appointment today and let us take care of the rest
             </p>
           </div>
-          <Link to="/book-appointment" className="inline-flex shrink-0 items-center gap-3 rounded bg-white px-5 py-3 text-xs font-black uppercase text-black">
+          <Link to="/book-appointment" className="inline-flex max-w-full shrink-0 items-center justify-between gap-3 whitespace-nowrap rounded bg-white px-4 py-3 text-[0.68rem] font-black uppercase text-black sm:px-5 sm:text-xs">
             Book your appointment now <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
