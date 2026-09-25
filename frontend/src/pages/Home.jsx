@@ -82,7 +82,7 @@ function Home() {
       </section>
 
       <section className="px-5 py-24">
-        <SectionTitle eyebrow="WHAT WE DO BEST" title="Our Services Categories" />
+        <SectionTitle eyebrow="WHAT WE DO BEST" title="Our Service Categories" />
         <div className="mx-auto mt-16 grid max-w-6xl gap-10 md:grid-cols-3">
           {services.map(({ title, href, icon: Icon, image }) => (
             <Link
