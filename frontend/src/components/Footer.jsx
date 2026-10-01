@@ -1,6 +1,6 @@
 import { ArrowRight, Mail, Phone, Scissors } from 'lucide-react'
 import { FaLocationDot } from 'react-icons/fa6'
-import beadsWhite from '../assets/beads-white.png'
+import beadsWhite from '../assets/beads_logo_white.png'
 import { navItems, socials } from '../data/siteData'
 
 function Footer() {

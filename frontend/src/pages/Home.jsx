@@ -6,7 +6,7 @@ import { GiFingernail } from 'react-icons/gi'
 import CTA from '../components/CTA'
 import SectionTitle from '../components/SectionTitle'
 import heroImg from '../assets/hello-img.png'
-import salonImg from '../assets/why-beads-img.png'
+import salonImg from '../assets/gallery/img4.jpeg'
 import hairServiceImg from '../assets/services/hair-service.png'
 import nailServiceImg from '../assets/services/nail-service.png'
 import skinCareImg from '../assets/services/skin-care.png'
@@ -57,9 +57,9 @@ function Home() {
           <div className="mx-auto flex h-full max-w-6xl items-center px-5">
             <div className="max-w-xl text-white">
               <h1 className="font-display text-5xl font-black leading-[0.92] sm:text-6xl md:text-7xl">
-                More than a haircut,
+                Beads
               </h1>
-              <p className="font-script mt-3 text-5xl leading-none sm:text-6xl md:text-7xl">it&apos;s your moment.</p>
+              <p className="font-script mt-3 text-5xl leading-none sm:text-6xl md:text-7xl">Hair, Nails & Skin Care</p>
               <div className="my-8 flex items-center gap-2 text-white/80">
                 <span className="h-px w-32 bg-white/70" />
                 <Scissors className="h-5 w-5" />

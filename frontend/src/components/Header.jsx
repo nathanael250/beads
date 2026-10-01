@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { ChevronDown, Menu, X } from 'lucide-react'
 import { FaLocationDot } from 'react-icons/fa6'
-import beadsLogo from '../assets/beads-logo.png'
+import beadsLogo from '../assets/beads_logo.png'
 import { navItems, serviceCategories, socials } from '../data/siteData'
 
 function Header() {

@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Search, Scissors, X } from 'lucide-react'
 import { hairServices, nailServices, skinServices } from '../data/servicesData'
 import barberImg from '../assets/barber.png'
-import beadsLogo from '../assets/beads-logo.png'
+import beadsLogo from '../assets/beads_logo.png'
 import nailServiceImg from '../assets/services/nail-service.png'
 import skinCareImg from '../assets/services/skin-care.png'
 
