@@ -59,7 +59,7 @@ function Home() {
               <h1 className="font-display text-5xl font-black leading-[0.92] sm:text-6xl md:text-7xl">
                 Beads
               </h1>
-              <p className="font-script mt-3 text-5xl leading-none sm:text-6xl md:text-7xl">Hair, Nails & Skin Care</p>
+              <p className="mt-3 whitespace-nowrap text-2xl font-semibold leading-none sm:text-4xl md:text-5xl">Hair, Nails & Skin Care</p>
               <div className="my-8 flex items-center gap-2 text-white/80">
                 <span className="h-px w-32 bg-white/70" />
                 <Scissors className="h-5 w-5" />
