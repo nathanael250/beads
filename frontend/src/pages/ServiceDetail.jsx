@@ -1,11 +1,49 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowRight, CalendarDays, CheckCircle, Clock } from 'lucide-react'
 import { getServiceById } from '../data/servicesData'
+import { fetchServices } from '../services/api'
 import barberImg from '../assets/barber.png'
 
 function ServiceDetail() {
   const { category = 'hair', serviceId } = useParams()
-  const service = getServiceById(category, serviceId)
+  const fallbackService = useMemo(() => getServiceById(category, serviceId), [category, serviceId])
+  const [service, setService] = useState(fallbackService)
+  const [isLoading, setIsLoading] = useState(!fallbackService)
+
+  useEffect(() => {
+    let isMounted = true
+
+    fetchServices()
+      .then((services) => {
+        if (!isMounted) {
+          return
+        }
+
+        const backendService = services.find((item) => item.category === category && item.id === serviceId)
+        setService(backendService || fallbackService)
+      })
+      .catch(() => setService(fallbackService))
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [category, serviceId, fallbackService])
+
+  if (isLoading) {
+    return (
+      <section className="border-t border-neutral-200 px-5 py-14 lg:py-20">
+        <div className="mx-auto max-w-5xl">
+          <div className="h-[360px] animate-pulse rounded-lg bg-neutral-200" />
+        </div>
+      </section>
+    )
+  }
 
   if (!service) {
     return <Navigate to="/services/hair" replace />

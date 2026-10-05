@@ -2,7 +2,7 @@ import { ArrowRight, Ear, Scissors, UsersRound } from 'lucide-react'
 import { PiHandHeartFill } from 'react-icons/pi'
 import CTA from '../components/CTA'
 import SectionTitle from '../components/SectionTitle'
-import salonImg from '../assets/why-beads-img.png'
+import salonImg from '../assets/gallery/img1.jpeg'
 
 function About() {
   const approaches = [

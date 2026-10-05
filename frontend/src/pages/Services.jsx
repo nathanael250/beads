@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowRight, CalendarDays } from 'lucide-react'
-import { getServicesByCategory } from '../data/servicesData'
+import { fetchServices } from '../services/api'
 
 function Services() {
   const { category = 'hair' } = useParams()
@@ -12,22 +12,51 @@ function Services() {
     'skin-care': 'skin care services',
   }
   const categoryTitle = categoryTitles[category] || categoryTitles.hair
-  const services = getServicesByCategory(category)
+  const [services, setServices] = useState([])
+  const [loadError, setLoadError] = useState('')
 
   useEffect(() => {
-    setIsLoading(true)
-    const timer = window.setTimeout(() => setIsLoading(false), 450)
+    let isMounted = true
 
-    return () => window.clearTimeout(timer)
+    fetchServices()
+      .then((apiServices) => {
+        if (!isMounted) {
+          return
+        }
+
+        const categoryServices = apiServices.filter((service) => service.category === category)
+        setServices(categoryServices)
+        setLoadError(categoryServices.length > 0 ? '' : 'No backend services were found for this category.')
+      })
+      .catch(() => {
+        if (isMounted) {
+          setServices([])
+          setLoadError('Backend services could not be loaded. Please check API auth and CORS.')
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setIsLoading(false)
+        }
+      })
+
+    return () => {
+      isMounted = false
+    }
   }, [category])
 
   return (
     <section className="border-t border-neutral-200 px-5 py-12 lg:py-16">
       <div className="mx-auto max-w-6xl">
         <p className="text-center text-lg font-medium">Explore our range of professional {categoryTitle}</p>
+        {loadError && <p className="mt-4 text-center text-sm font-semibold text-neutral-600">{loadError}</p>}
 
         {isLoading ? (
           <ServiceSkeletonGrid />
+        ) : services.length === 0 ? (
+          <div className="mt-14 rounded-lg border border-neutral-200 px-6 py-10 text-center text-sm font-semibold text-neutral-700">
+            Services are not available right now.
+          </div>
         ) : (
           <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {services.map(({ id, title, text, image }) => (
