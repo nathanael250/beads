@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import ctaImg from '../assets/cta-img.png'
+import ctaImg from '../assets/optimized/cta-img.webp'
 
 function CTA() {
   return (
     <div className="mx-auto max-w-6xl overflow-hidden rounded-lg bg-black text-white">
       <div className="relative min-h-56 sm:min-h-36">
-        <img src={ctaImg} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <img loading="lazy" decoding="async" src={ctaImg} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="relative flex min-h-56 flex-col items-start justify-center gap-5 px-6 py-8 sm:min-h-36 sm:flex-row sm:items-center sm:justify-between md:px-24">
           <div>
             <h3 className="font-display text-3xl font-black">Ready for a fresh look?</h3>

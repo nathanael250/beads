@@ -2,7 +2,7 @@ import { ArrowRight, Ear, Scissors, UsersRound } from 'lucide-react'
 import { PiHandHeartFill } from 'react-icons/pi'
 import CTA from '../components/CTA'
 import SectionTitle from '../components/SectionTitle'
-import salonImg from '../assets/gallery/img1.jpeg'
+import salonImg from '../assets/optimized/gallery/img1.webp'
 
 function About() {
   const approaches = [
@@ -65,7 +65,7 @@ function About() {
               Our Journey <ArrowRight className="h-4 w-4" />
             </button>
           </div>
-          <img src={salonImg} alt="Beads salon interior" className="hidden h-[360px] w-full rounded-lg object-cover lg:block lg:h-[410px]" />
+          <img loading="lazy" decoding="async" src={salonImg} alt="Beads salon interior" className="hidden h-[360px] w-full rounded-lg object-cover lg:block lg:h-[410px]" />
         </div>
       </section>
 

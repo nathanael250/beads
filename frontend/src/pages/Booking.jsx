@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Search, Scissors, X } from 'lucide-react'
 import { createAppointment, fetchEmployees, fetchServices } from '../services/api'
-import beadsLogo from '../assets/beads_logo.png'
+import beadsLogo from '../assets/optimized/beads_logo.webp'
 
 const serviceGroupShells = [
   { key: 'hair', label: 'Hair Services' },

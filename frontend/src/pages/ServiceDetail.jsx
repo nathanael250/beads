@@ -1,7 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowRight, CalendarDays, CheckCircle, Clock } from 'lucide-react'
 import { getServiceById } from '../data/servicesData'
-import barberImg from '../assets/barber.png'
+import barberImg from '../assets/optimized/barber.webp'
 
 function ServiceDetail() {
   const { category = 'hair', serviceId } = useParams()
@@ -26,7 +26,7 @@ function ServiceDetail() {
     <section className="border-t border-neutral-200 px-5 py-14 lg:py-20">
       <div className="mx-auto max-w-5xl">
         <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-          <img
+          <img loading="lazy" decoding="async"
             src={service.image}
             alt={`${service.title} service`}
             className="h-[300px] w-full rounded-lg object-cover object-center lg:h-[360px]"
@@ -78,7 +78,7 @@ function ServiceDetail() {
             </div>
 
             <div className="grid items-center gap-8 border-neutral-200 lg:grid-cols-[180px_1fr] lg:border-l lg:pl-12">
-              <img
+              <img loading="lazy" decoding="async"
                 src={barberImg}
                 alt="Jean Claude"
                 className="h-40 w-40 rounded-full object-cover object-left"

@@ -44,7 +44,7 @@ function Services() {
                 to={`/services/${category}/${id}`}
                 className="group flex h-[360px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_2px_10px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
               >
-                <img src={image} alt={title} className="h-40 w-full object-cover object-center" />
+                <img loading="lazy" decoding="async" src={image} alt={title} className="h-40 w-full object-cover object-center" />
                 <div className="flex flex-1 flex-col px-5 pb-5 pt-5">
                   <h2 className="font-display text-xl font-black leading-none">{title}</h2>
                   <div className="mt-4 flex items-start justify-between gap-4">

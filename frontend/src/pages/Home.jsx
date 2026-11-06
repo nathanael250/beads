@@ -5,14 +5,14 @@ import { PiHairDryerFill, PiPaintBrushBroadFill, PiSprayBottleFill } from 'react
 import { GiFingernail } from 'react-icons/gi'
 import CTA from '../components/CTA'
 import SectionTitle from '../components/SectionTitle'
-import heroImg from '../assets/hello-img.png'
-import salonImg from '../assets/gallery/img6.JPG'
-import hairServiceImg from '../assets/services/hair-service.png'
-import nailServiceImg from '../assets/services/nail-service.png'
-import skinCareImg from '../assets/services/skin-care.png'
+import heroImg from '../assets/optimized/hello-img.webp'
+import salonImg from '../assets/optimized/gallery/img6.webp'
+import hairServiceImg from '../assets/optimized/services/hair-service.webp'
+import nailServiceImg from '../assets/optimized/services/nail-service.webp'
+import skinCareImg from '../assets/optimized/services/skin-care.webp'
 
 const galleryImages = Object.entries(
-  import.meta.glob('../assets/gallery/*.{jpg,jpeg,png}', {
+  import.meta.glob('../assets/optimized/gallery/*.webp', {
     eager: true,
     import: 'default',
   }),
@@ -52,7 +52,7 @@ function Home() {
   return (
     <>
       <section className="relative overflow-hidden bg-black">
-        <img src={heroImg} alt="Woman receiving salon hair styling" className="h-[580px] w-full object-cover object-center md:h-[680px]" />
+        <img loading="eager" fetchPriority="high" decoding="async" src={heroImg} alt="Woman receiving salon hair styling" className="h-[580px] w-full object-cover object-center md:h-[680px]" />
         <div className="absolute inset-0">
           <div className="mx-auto flex h-full max-w-6xl items-center px-5">
             <div className="max-w-xl text-white">
@@ -90,7 +90,7 @@ function Home() {
               to={href}
               className="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-center transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
             >
-              <img src={image} alt="" className="h-40 w-full object-cover grayscale" />
+              <img loading="lazy" decoding="async" src={image} alt="" className="h-40 w-full object-cover grayscale" />
               <div className="relative px-8 pb-8 pt-16">
                 <div className="absolute left-1/2 top-0 grid h-16 w-16 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-white bg-black text-white">
                   <Icon className="h-9 w-9" />
@@ -110,7 +110,7 @@ function Home() {
 
       <section className="bg-black px-5 py-12 text-white">
         <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1fr_1fr]">
-          <img src={salonImg} alt="Beads salon interior" className="hidden h-full max-h-[310px] w-full rounded object-cover lg:block" />
+          <img loading="lazy" decoding="async" src={salonImg} alt="Beads salon interior" className="hidden h-full max-h-[310px] w-full rounded object-cover lg:block" />
           <div>
             <p className="text-sm font-black uppercase text-white/75">Why Beads</p>
             <h2 className="font-display mt-2 text-4xl font-black sm:text-5xl">A moment that&apos;s yours</h2>
@@ -164,14 +164,14 @@ function Home() {
       <section className="px-5 pb-24">
         <SectionTitle eyebrow="OUR GALLERY" title="Experience at Beads" />
         <div className="mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-[1.15fr_1fr]">
-          <img
+          <img loading="lazy" decoding="async"
             src={galleryImages[0]}
             alt="Beads salon experience"
             className="h-[340px] w-full object-cover sm:h-[520px]"
           />
           <div className="grid grid-cols-2 gap-6">
             {galleryImages.slice(1, 5).map((image, index) => (
-              <img
+              <img loading="lazy" decoding="async"
                 key={image}
                 src={image}
                 alt={`Beads gallery view ${index + 2}`}

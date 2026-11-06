@@ -1,16 +1,16 @@
-import classicHaircutImg from '../assets/Classic_hari_cut.png'
+import classicHaircutImg from '../assets/optimized/Classic_hari_cut.webp'
 
-const hairServiceImages = import.meta.glob('../assets/hair services/*.{jpg,jpeg,png}', {
+const hairServiceImages = import.meta.glob('../assets/optimized/hair services/*.webp', {
   eager: true,
   import: 'default',
 })
 
-const nailServiceImages = import.meta.glob('../assets/nails services/*.{jpg,jpeg,png}', {
+const nailServiceImages = import.meta.glob('../assets/optimized/nails services/*.webp', {
   eager: true,
   import: 'default',
 })
 
-const skinServiceImages = import.meta.glob('../assets/skin service/*.{jpg,jpeg,png}', {
+const skinServiceImages = import.meta.glob('../assets/optimized/skin service/*.webp', {
   eager: true,
   import: 'default',
 })
