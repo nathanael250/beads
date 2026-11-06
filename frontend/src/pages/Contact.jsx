@@ -4,7 +4,7 @@ function Contact() {
   const contactItems = [
     {
       title: 'Our Location',
-      text: ['Brilliant Tower', 'Kigali - Kacyiru'],
+      text: ['Brilliant Tower', ' 11 KG 5043 St, Kigali - Kacyiru'],
       icon: MapPin,
     },
     {

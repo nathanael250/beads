@@ -5,6 +5,7 @@ import About from './pages/About'
 import Booking from './pages/Booking'
 import Contact from './pages/Contact'
 import Home from './pages/Home'
+import Gallery from './pages/Gallery'
 import ServiceDetail from './pages/ServiceDetail'
 import Services from './pages/Services'
 
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/services" element={<Navigate to="/services/hair" replace />} />
         <Route path="/services/:category" element={<Services />} />
         <Route path="/services/:category/:serviceId" element={<ServiceDetail />} />
