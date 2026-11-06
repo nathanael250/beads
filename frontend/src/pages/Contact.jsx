@@ -4,7 +4,7 @@ function Contact() {
   const contactItems = [
     {
       title: 'Our Location',
-      text: ['11, KG 7 Avenue, KG543 Street,', 'Kigali, Rwanda.'],
+      text: ['Brilliant Tower', 'Kigali - Kacyiru'],
       icon: MapPin,
     },
     {
@@ -14,7 +14,7 @@ function Contact() {
     },
     {
       title: 'Email Us',
-      text: ['info@beads.com'],
+      text: ['info@beadshisn.com'],
       icon: Mail,
     },
     {

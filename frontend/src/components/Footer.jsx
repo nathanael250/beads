@@ -24,8 +24,8 @@ function Footer() {
             <h4 className="text-sm font-black">Contact Us</h4>
             <div className="mt-4 space-y-3 text-sm text-white/75">
               <p className="flex gap-3"><Phone className="h-4 w-4" /> +250 788 869 973<br />+250 792 987 661</p>
-              <p className="flex gap-3"><Mail className="h-4 w-4" /> info@beads.com</p>
-              <p className="flex gap-3"><FaLocationDot className="h-4 w-4" /> beads-ltd.com</p>
+              <p className="flex gap-3"><Mail className="h-4 w-4 shrink-0" /> info@beadshisn.com</p>
+              <p className="flex gap-3"><FaLocationDot className="h-4 w-4 shrink-0" /><span>Brilliant Tower<br />Kigali - Kacyiru</span></p>
             </div>
           </div>
         </div>

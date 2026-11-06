@@ -17,7 +17,7 @@ function Header() {
         <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-4 py-3 text-[11px] font-semibold sm:justify-between sm:px-5 sm:text-sm">
           <div className="flex min-w-0 items-center gap-2">
             <FaLocationDot className="h-4 w-4 shrink-0" />
-            <span className="truncate">11, KG 7 Avenue, KG543 Street, Kigali, Rwanda.</span>
+            <span className="min-w-0">Brilliant Tower, Kigali - Kacyiru</span>
           </div>
           <div className="hidden items-center gap-3 sm:flex">
             <span className="text-white/70">Follow Us:</span>
