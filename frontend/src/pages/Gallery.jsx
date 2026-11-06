@@ -7,6 +7,16 @@ const images = Object.entries(import.meta.glob('../assets/gallery/gallery_page/*
   import: 'default',
 })).sort(([a], [b]) => a.localeCompare(b))
 
+const thumbnails = import.meta.glob('../assets/gallery/gallery_page/thumbnails/*.webp', {
+  eager: true,
+  import: 'default',
+})
+
+function thumbnailFor(path) {
+  const filename = path.split('/').pop().replace(/\.[^.]+$/, '.webp')
+  return thumbnails[`../assets/gallery/gallery_page/thumbnails/${filename}`]
+}
+
 function Gallery() {
   const [active, setActive] = useState(null)
   const move = (step) => setActive((index) => (index + step + images.length) % images.length)
@@ -16,8 +26,8 @@ function Gallery() {
         <SectionTitle eyebrow="OUR GALLERY" title="Experience at Beads" />
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {images.map(([path, image], index) => (
-            <button type="button" key={path} onClick={(event) => { setActive(index); event.currentTarget.closest('section').querySelector('dialog').showModal() }} aria-label={`Open Beads gallery photo ${index + 1}`} className="block overflow-hidden rounded focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4">
-              <img src={image} alt={`Beads salon gallery photo ${index + 1}`} loading="lazy" decoding="async" className="aspect-[4/3] w-full object-cover transition duration-300 hover:scale-105" />
+            <button type="button" key={path} onClick={(event) => { setActive(index); event.currentTarget.closest('section').querySelector('dialog').showModal() }} aria-label={`Open Beads gallery photo ${index + 1}`} className="block aspect-[4/3] overflow-hidden rounded bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4">
+              <img src={thumbnailFor(path) || image} alt={`Beads salon gallery photo ${index + 1}`} loading={index < 3 ? 'eager' : 'lazy'} fetchPriority={index === 0 ? 'high' : 'auto'} decoding="async" width="800" height="600" className="h-full w-full object-cover transition duration-300 hover:scale-105" />
             </button>
           ))}
         </div>
