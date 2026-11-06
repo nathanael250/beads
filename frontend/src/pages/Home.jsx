@@ -56,10 +56,10 @@ function Home() {
         <div className="absolute inset-0">
           <div className="mx-auto flex h-full max-w-6xl items-center px-5">
             <div className="max-w-xl text-white">
-              <h1 className="font-display text-5xl font-black leading-[0.92] sm:text-6xl md:text-7xl">
-                Beads
+              <h1 className="font-script whitespace-nowrap text-4xl font-normal leading-none sm:text-6xl md:text-7xl">
+                Beads Hair Care
               </h1>
-              <p className="mt-3 whitespace-nowrap text-2xl font-semibold leading-none sm:text-4xl md:text-5xl">Hair, Nails & Skin Care</p>
+              <p className="mt-3 whitespace-nowrap text-xl font-semibold leading-none sm:text-3xl md:text-4xl">Hair, Nails & Skin Care</p>
               <div className="my-8 flex items-center gap-2 text-white/80">
                 <span className="h-px w-32 bg-white/70" />
                 <Scissors className="h-5 w-5" />

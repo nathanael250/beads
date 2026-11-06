@@ -1,55 +1,34 @@
-import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { ArrowRight, CalendarDays } from 'lucide-react'
-import { fetchServices } from '../services/api'
+import { getServicesByCategory } from '../data/servicesData'
+
+const CARD_DESCRIPTION_LIMIT = 92
+
+function getCardDescription(text = '') {
+  const normalizedText = text.replace(/\s+/g, ' ').trim()
+
+  if (normalizedText.length <= CARD_DESCRIPTION_LIMIT) {
+    return normalizedText
+  }
+
+  return `${normalizedText.slice(0, CARD_DESCRIPTION_LIMIT).trimEnd()}...`
+}
 
 function Services() {
   const { category = 'hair' } = useParams()
-  const [isLoading, setIsLoading] = useState(true)
+  const isLoading = false
   const categoryTitles = {
     hair: 'hair services',
     nails: 'nail services',
     'skin-care': 'skin care services',
   }
   const categoryTitle = categoryTitles[category] || categoryTitles.hair
-  const [services, setServices] = useState([])
-  const [loadError, setLoadError] = useState('')
-
-  useEffect(() => {
-    let isMounted = true
-
-    fetchServices()
-      .then((apiServices) => {
-        if (!isMounted) {
-          return
-        }
-
-        const categoryServices = apiServices.filter((service) => service.category === category)
-        setServices(categoryServices)
-        setLoadError(categoryServices.length > 0 ? '' : 'No backend services were found for this category.')
-      })
-      .catch(() => {
-        if (isMounted) {
-          setServices([])
-          setLoadError('Backend services could not be loaded. Please check API auth and CORS.')
-        }
-      })
-      .finally(() => {
-        if (isMounted) {
-          setIsLoading(false)
-        }
-      })
-
-    return () => {
-      isMounted = false
-    }
-  }, [category])
+  const services = getServicesByCategory(category)
 
   return (
     <section className="border-t border-neutral-200 px-5 py-12 lg:py-16">
       <div className="mx-auto max-w-6xl">
         <p className="text-center text-lg font-medium">Explore our range of professional {categoryTitle}</p>
-        {loadError && <p className="mt-4 text-center text-sm font-semibold text-neutral-600">{loadError}</p>}
 
         {isLoading ? (
           <ServiceSkeletonGrid />
@@ -63,13 +42,13 @@ function Services() {
               <Link
                 key={id}
                 to={`/services/${category}/${id}`}
-                className="group overflow-hidden rounded-lg bg-white shadow-[0_2px_10px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
+                className="group flex h-[360px] flex-col overflow-hidden rounded-lg bg-white shadow-[0_2px_10px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-4"
               >
                 <img src={image} alt={title} className="h-40 w-full object-cover object-center" />
-                <div className="px-5 pb-5 pt-5">
+                <div className="flex flex-1 flex-col px-5 pb-5 pt-5">
                   <h2 className="font-display text-xl font-black leading-none">{title}</h2>
-                  <div className="mt-4 flex min-h-10 items-end justify-between gap-4">
-                    <p className="max-w-40 text-[13px] font-medium leading-tight">{text}</p>
+                  <div className="mt-4 flex items-start justify-between gap-4">
+                    <p className="line-clamp-4 max-w-40 text-[13px] font-medium leading-tight">{getCardDescription(text)}</p>
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-black text-white">
                       <ArrowRight className="h-5 w-5 transition group-hover:translate-x-1" />
                     </span>
